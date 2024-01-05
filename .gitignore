@@ -6,6 +6,7 @@ media
 *.pyc
 env
 venv
+env_name
 virtualenv
 .code
 src/*/node_moduels
