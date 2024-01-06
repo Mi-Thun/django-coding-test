@@ -75,7 +75,7 @@
         <tbody>
           {% for product in products %}
           <tr>
-            <td>{{ forloop.counter }}</td>
+            <td>{{ product.id }}</td>
             <td>
               {{ product.title }} <br />
               Created at : {{ product.created_at|date:"d-M-Y" }}
@@ -125,6 +125,36 @@
           Showing {{ products.start_index }} to {{ products.end_index }} out of
           {{ products.paginator.count }}
         </p>
+      </div>
+      <div class="col-md-6 text-center">
+        <ul class="pagination pagination-box">
+          {% if products.has_previous %}
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ products.previous_page_number }}"
+              aria-label="Previous"
+            >
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {% endif %} {% for i in products.paginator.page_range %}
+          <li class="page-item {% if products.number == i %}active{% endif %}">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+          </li>
+          {% endfor %} {% if products.has_next %}
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ products.next_page_number }}"
+              aria-label="Next"
+            >
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+
+          {% endif %}
+        </ul>
       </div>
     </div>
   </div>
