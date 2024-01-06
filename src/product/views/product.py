@@ -4,6 +4,8 @@ from django.views import View
 from django.shortcuts import render
 from product.models import Product, ProductVariant, ProductVariantPrice, Variant
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 class CreateProductView(generic.TemplateView):
     template_name = 'products/create.html'
@@ -17,9 +19,19 @@ class CreateProductView(generic.TemplateView):
 
 class ProductListView(View):
     template_name = 'products/list.html'
+    items_per_page = 5
 
     def get_context_data(self, **kwargs):
         context = {'products': Product.objects.all()}
+        paginator = Paginator(context['products'], self.items_per_page)
+        page = self.request.GET.get('page')
+
+        try:
+            context['products'] = paginator.page(page)
+        except PageNotAnInteger:
+            context['products'] = paginator.page(1)
+        except EmptyPage:
+            context['products'] = paginator.page(paginator.num_pages)
         for product in context['products']:
             product.variants = ProductVariant.objects.filter(product=product)
             for variant in product.variants:

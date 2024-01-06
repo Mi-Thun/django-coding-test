@@ -121,10 +121,30 @@
   <div class="card-footer">
     <div class="row justify-content-between">
       <div class="col-md-6">
-        <p>Showing 1 to 10 out of 100</p>
+        <p>
+          Showing {{ products.start_index }} to {{ products.end_index }} out of
+          {{ products.paginator.count }}
+        </p>
       </div>
-      <div class="col-md-2"></div>
+      <div class="col-md-2">
+        <div class="pagination">
+          <span class="step-links">
+            {% if products.has_previous %}
+            <a href="?page={{ products.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            <span class="current">
+              Page {{ products.number }} of {{ products.paginator.num_pages }}
+            </span>
+
+            {% if products.has_next %}
+            <a href="?page={{ products.next_page_number }}"> Next</a>
+            {% endif %}
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 {% endblock %}
