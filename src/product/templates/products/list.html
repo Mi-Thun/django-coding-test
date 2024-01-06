@@ -126,25 +126,8 @@
           {{ products.paginator.count }}
         </p>
       </div>
-      <div class="col-md-2">
-        <div class="pagination">
-          <span class="step-links">
-            {% if products.has_previous %}
-            <a href="?page={{ products.previous_page_number }}">Previous</a>
-            {% endif %}
-
-            <span class="current">
-              Page {{ products.number }} of {{ products.paginator.num_pages }}
-            </span>
-
-            {% if products.has_next %}
-            <a href="?page={{ products.next_page_number }}"> Next</a>
-            {% endif %}
-          </span>
-        </div>
-      </div>
     </div>
   </div>
-</div>
 
-{% endblock %}
+  {% endblock %}
+</div>

@@ -32,6 +32,7 @@ class ProductListView(View):
             context['products'] = paginator.page(1)
         except EmptyPage:
             context['products'] = paginator.page(paginator.num_pages)
+
         for product in context['products']:
             product.variants = ProductVariant.objects.filter(product=product)
             for variant in product.variants:
