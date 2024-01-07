@@ -17,8 +17,18 @@
         />
       </div>
       <div class="col-md-2">
-        <select name="variant" id="" class="form-control">
+        <select name="variant" id="variantDropdown" class="form-control">
           <option selected disabled>--Select A Variant--</option>
+
+          {% for item in variant_data %}
+          <optgroup label="{{ item.variant.title }}">
+            {% for pv in item.productvariants %}
+            <option value="{{ pv.variant_title }}">
+              {{ pv.variant_title }}
+            </option>
+            {% endfor %}
+          </optgroup>
+          {% endfor %}
         </select>
       </div>
 
